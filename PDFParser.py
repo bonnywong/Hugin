@@ -10,20 +10,25 @@ class PDFParser():
     def __init__(self):
         print("Created PDFParser object.")
 
-    def parsepdf(self, filepath, encoding="utf-8"):
+    def printingTest(self):
+        print("Hello hello!")
+
+    def parsePDF(self, filePath):
         """
-            Parses pdf and returns raw parsed content
+            Parses pdf and returns raw content
 
             :param filepath: path to pdf file to be parsed
             :param encoding: encoding of the file, defaults to utf-8
             :return: parsed data
             """
         # file = open("pdfs/20120412_ShortHistory_en.pdf", "rb")
-        if filepath == "":
-            print("No filepath was privded.")
-            return 0
+        print("Hello hello!")
 
-        file = open(filepath, "rb", encoding=encoding)
+        if filePath == "":
+            print("No file was provided.")
+            return 0
+        else:
+            file = open(filePath, "rb")
 
         output = StringIO()
         manager = PDFResourceManager()
