@@ -6,11 +6,12 @@ from PyQt5.QtGui import QIcon
 import LanguageProcessor
 from FileHandler import FileHandler
 from PDFParser import PDFParser
+from TokenDialog import TokenDialog
 
 
 class Parser(QMainWindow):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, argv=None):
+        super().__init__(argv)
         self.initUI()
 
     def initMenu(self):
@@ -60,12 +61,16 @@ class Parser(QMainWindow):
         # tokenMenu options
         nounButton = QAction("Noun tokens", self)
         tokenMenu.addAction(nounButton)
+        nounButton.triggered.connect(self.openNounTokenDialog)
 
         verbButton = QAction("Verb tokens", self)
         tokenMenu.addAction(verbButton)
+        verbButton.triggered.connect(self.openVerbTokenDialog)
 
         adjectiveButton = QAction("Adjective tokens", self)
         tokenMenu.addAction(adjectiveButton)
+        adjectiveButton.triggered.connect(self.openAdjectiveTokenDialog)
+
 
         # visualizeMenu options
         sentenceButton = QAction("Show sentences", self)
@@ -74,7 +79,7 @@ class Parser(QMainWindow):
     def initUI(self):
 
         # Windows
-        self.resize(540, 320)
+        self.resize(740, 420)
         self.setWindowTitle('Icon')
         self.setWindowIcon(QIcon('web.png'))
         self.setWindowTitle('Hugin pre-process')
@@ -137,8 +142,21 @@ class Parser(QMainWindow):
         result = QMessageBox.about(widget, "Hello! This is a help window.", "Close")
         widget.show()
 
-    def showTokens(self):
-        return 0
+
+    def openNounTokenDialog(self):
+        print("openNounTokenDialog")
+        self.tokenDialog = TokenDialog("noun")
+
+
+    def openVerbTokenDialog(self):
+        print("openVerbTokenDialog")
+        self.tokenDialog = TokenDialog("verb")
+
+    def openAdjectiveTokenDialog(self):
+        print("openAdjectiveTokenDialog")
+        self.tokenDialog = TokenDialog("adjective")
+        self.tokenDialog.show()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
